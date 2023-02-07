@@ -21,6 +21,9 @@
         <field name="model">estate.property</field>
         <field name="arch" type="xml">
             <form string="estate property form">
+                <header>
+                    <button name="action_sold" type="object" string="Sold"/>
+                </header>
                 <sheet>                    
                     <div class="oe_title">
                         <h1 class="mb100">
@@ -28,6 +31,15 @@
                         </h1>
                     </div>
                     <group>
+                        <group>
+                            <field name="tags_ids" widget="many2many_tags"/>
+                        </group>
+                        <group>
+                            <field name="state"/>
+                        </group>
+                        <group>
+                            <field name="property_type_id"/>
+                        </group>
                         <group>
                             <field name="postcode"/>
                         </group>
@@ -38,10 +50,13 @@
                             <field name="date_availability"/>
                         </group>
                         <group>
+                            <field name="best_offer"/>
+                        </group>
+                        <group>
                             <field name="selling_price"/>
                         </group>
                         <notebook>
-                            <page string ="description">
+                            <page string ="Description">
                                 <group>
                                     <field name="description"/>
                                 </group>
@@ -68,6 +83,22 @@
                                 </group>
                                 <group>
                                     <field name="state"/>
+                                </group>
+                                <group>
+                                    <field name="total_area"/>
+                                </group>
+                            </page>
+                            <page string ="Offers">
+                                <group>
+                                    <field name="offer_ids"/>
+                                </group>
+                            </page>
+                            <page string ="Other Info">
+                                <group>
+                                    <field name="salesperson_id" string="Salesman"/>
+                                </group>
+                                <group>
+                                    <field name="buyer_id"/>
                                 </group>
                             </page>
                         </notebook>
@@ -97,6 +128,12 @@
     <record id = "estate_property_action" model="ir.actions.act_window">
         <field name = "name">Properties</field>
         <field name = "res_model">estate.property</field>
+        <field name = "view_mode">tree,form</field>
+    </record>
+
+    <record id = "estate_property_type_action" model="ir.actions.act_window">
+        <field name = "name">Property Types</field>
+        <field name = "res_model">estate.property.type</field>
         <field name = "view_mode">tree,form</field>
     </record>
 </odoo>
